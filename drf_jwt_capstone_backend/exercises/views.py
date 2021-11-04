@@ -12,6 +12,26 @@ from django.http.response import Http404
 class ExerciseList(APIView):
 
     def get(self, request):
-        exercises = Exercise.objects.all()
-        serializer = ExerciseSerializer(exercises)
+        exercise = Exercise.objects.all()
+        serializer = ExerciseSerializer(exercise, many=True)
+        return Response(serializer.data)
+
+    def post(self, request):
+        serializer = ExerciseSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class ExerciseDetail(APIView):
+
+    def get_object(pk):
+        try:
+            return Exercise.objects.get(pk=pk)
+        except Exercise.DoesNotExist:
+            raise Http404
+
+    def get(self, request, pk):
+        exercise = self.get_object(pk)
+        serializer = ExerciseSerializer(exercise)
         return Response(serializer.data)
