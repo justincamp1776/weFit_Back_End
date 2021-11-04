@@ -25,7 +25,7 @@ class ExerciseList(APIView):
 
 class ExerciseDetail(APIView):
 
-    def get_object(pk):
+    def get_object(self, pk):
         try:
             return Exercise.objects.get(pk=pk)
         except Exercise.DoesNotExist:
@@ -35,3 +35,11 @@ class ExerciseDetail(APIView):
         exercise = self.get_object(pk)
         serializer = ExerciseSerializer(exercise)
         return Response(serializer.data)
+
+    def patch(self, request, pk):
+        exercise=self.get_object(pk)
+        serializer=ExerciseSerializer(exercise, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
