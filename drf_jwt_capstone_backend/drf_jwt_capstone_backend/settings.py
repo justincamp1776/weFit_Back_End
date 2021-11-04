@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'authentication.apps.AuthenticationConfig',
     'corsheaders',
+    'goals.apps.GoalsConfig',
+    'exercises.apps.ExercisesConfig',
 ]
 
 MIDDLEWARE = [
