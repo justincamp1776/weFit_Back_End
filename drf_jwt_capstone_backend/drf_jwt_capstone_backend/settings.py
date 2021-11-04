@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'corsheaders',
     'goals.apps.GoalsConfig',
     'exercises.apps.ExercisesConfig',
+    'workout_names.apps.WorkoutNamesConfig',
+    'names.apps.NamesConfig',
 ]
 
 MIDDLEWARE = [
