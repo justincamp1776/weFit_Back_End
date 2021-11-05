@@ -6,4 +6,4 @@ class NameSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Name
-        fields = ['id', 'workout_name', 'user']
+        fields = ['id', 'workout_name']

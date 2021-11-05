@@ -1,0 +1,8 @@
+
+        Exercise Table              Workout Names
+                \                        /
+                 \                      /
+                  Workout Junction Table
+
+
+    Each User 

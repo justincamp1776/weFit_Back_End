@@ -23,3 +23,16 @@ class NameList(APIView):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class NameDetail(APIView):
+
+    def get_object(self, pk):
+        try:
+            return Name.objects.get(pk=pk)
+        except Name.DoesNotExist:
+            return Http404
+
+    def delete(self, request, pk):
+        name = self.get_object(pk)
+        name.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)

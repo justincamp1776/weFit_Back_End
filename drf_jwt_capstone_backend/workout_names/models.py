@@ -8,5 +8,4 @@ from django.db.models.fields.related import ForeignKey
 User = get_user_model()
 
 class WorkoutName(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=30, blank=True, null=True)

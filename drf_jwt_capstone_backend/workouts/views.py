@@ -26,15 +26,25 @@ class WorkoutList(APIView):
 
 class WorkoutDetail(APIView):
 
-    def get_object(self, request, pk):
+    def get_object(self, pk):
         try:
             return Workout.objects.get(pk=pk)
         except Workout.DoesNotExist:
             return Http404
 
+    # Quering the names app Name Model
+    def get_name(self, pk):
+        try:
+            return Name.objects.get(pk=pk)
+        except Name.DoesNotExist:
+            return Http404
+
+    # pk = name_id
     def get(self, request, pk):
             workout = Workout.objects.filter(name=pk)
-            serializer = WorkoutSerializer(workout, many=True)
+            # name = self.get_name(pk)
+            # print(name.workout_name)
+            serializer = WorkoutSerializer(workout, many=True) 
             return Response(serializer.data)
 
     def patch(self, request, pk):
@@ -45,4 +55,9 @@ class WorkoutDetail(APIView):
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
+
+    def delete(self, request, pk):
+        workout = self.get_object(pk)
+        workout.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
         
