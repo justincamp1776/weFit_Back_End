@@ -7,3 +7,6 @@ class ExerciseSerializer(serializers.ModelSerializer):
         model = Exercise
         fields = ['id', 'name', 'priority', 'plane', 'num_of_limbs', 'push_pull', 'body_part', 
         'up_low', 'hip_pos', 'agonist', 'antagonist', 'synergist', 'about']
+
+
+

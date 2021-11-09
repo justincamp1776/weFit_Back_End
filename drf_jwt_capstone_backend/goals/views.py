@@ -20,11 +20,40 @@ class GoalList(APIView):
         else:
             return Response(serializer.errors, status.HTTP_400_BAD_REQUEST)
 
+    def get(self, request):
+        song = Goal.objects.all()
+        serializer = GoalSerializer(song, many=True)
+        return Response(serializer.data)
+
+
+class GoalCollection(APIView):
+
+     def get(self, request, user_id):
+        goals = Goal.objects.filter(user_id=user_id)
+        serializer = GoalSerializer(goals, many=True)
+        return Response(serializer.data)
+
 
 class GoalDetail(APIView):
 
-    def get(self, request, user_id):
-        goal = Goal.objects.get(user_id=user_id)
-        serializer = GoalSerializer(goal)
-        return Response(serializer.data)
+    def get_object(self, pk):
+        try:
+            return Goal.objects.get(pk=pk)
+        except Goal.DoesNotExist:
+            return Http404
+
+    def patch(self, request, pk):
+        exercise = self.get_object(pk)
+        serializer = GoalSerializer(exercise, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, pk):
+        goal = self.get_object(pk)
+        goal.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+
 

@@ -5,4 +5,12 @@
                   Workout Junction Table
 
 
-    Each User 
+    Each User will be able to view the workouts page. 
+    The Workouts page will list the exercise names and possibly a few fields.
+
+    I need to access related properties by calling the junction table and filtering by the workout_name ID.
+    This filter should only return the exercises that are associated with that Id.
+
+     Problem: As of now, I cannot access exercise properties or workout name through the junction table. 
+                I can query the Workout_name table and print the name to the console within the GET() junction
+                table function BUT I do not have an appropriate serializer to handle the modified request.

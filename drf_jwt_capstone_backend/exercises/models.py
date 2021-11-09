@@ -4,6 +4,7 @@ from django.db import models
 # Create your models here.
 class Exercise(models.Model):
     name = models.CharField(max_length=75, blank=True, null=True)
+    workout_name = models.CharField(max_length = 75, blank=True, null=True)
     priority = models.CharField(max_length=30, blank=True, null=True)
     plane = models.CharField(max_length=50, blank=True, null=True)
     num_of_limbs = models.CharField(max_length=50, blank=True, null=True)

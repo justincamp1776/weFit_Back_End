@@ -5,4 +5,4 @@ from .models import Goal
 class GoalSerializer(serializers.ModelSerializer):
     class Meta:
         model = Goal
-        fields = ['id', 'body', 'user_id']
+        fields = ['id', 'selected_goal', 'custom_goal', 'user']

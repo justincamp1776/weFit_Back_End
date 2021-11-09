@@ -13,6 +13,7 @@ from django.http.response import Http404
 
 
 
+
 class WorkoutList(APIView):
 
     def post(self, request):
@@ -32,7 +33,6 @@ class WorkoutDetail(APIView):
         except Workout.DoesNotExist:
             return Http404
 
-    # Quering the names app Name Model
     def get_name(self, pk):
         try:
             return Name.objects.get(pk=pk)
@@ -42,8 +42,6 @@ class WorkoutDetail(APIView):
     # pk = name_id
     def get(self, request, pk):
             workout = Workout.objects.filter(name=pk)
-            # name = self.get_name(pk)
-            # print(name.workout_name)
             serializer = WorkoutSerializer(workout, many=True) 
             return Response(serializer.data)
 

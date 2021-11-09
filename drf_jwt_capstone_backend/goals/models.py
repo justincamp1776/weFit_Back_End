@@ -8,6 +8,8 @@ User = get_user_model()
 
 class Goal(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    body = models.CharField(max_length=100, default="increase strength")
+    selected_goal = models.CharField(max_length = 100, default="Burn Fat and Lose Weight")
+    custom_goal = models.CharField(max_length=250, default="I want to follow this program every week for 1 month.")
+    
   
 
